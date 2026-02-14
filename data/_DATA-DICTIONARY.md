@@ -1,0 +1,357 @@
+# Data Dictionary
+
+This document describes all data files in the `data/` directory and its subdirectories.
+
+## Directory Structure
+
+```
+data/
+├── simulated/              # Simulated example datasets
+├── power_analysis/         # Power analysis results
+└── workflow_results/       # Complete workflow outputs
+```
+
+---
+
+## `simulated/` - Simulated Example Datasets
+
+### `example_dataset_for_preregistration.csv`
+
+Example simulated dataset demonstrating the data structure for the study.
+
+**Variables:**
+- `output_id` (integer): Unique identifier for each research output
+- `institution` (character): Institution code (e.g., "Inst1", "Inst2")
+- `career_stage` (character): Student career level ("MSc" or "PhD")
+- `stratum` (character): Combined institution × career stage (e.g., "Inst1_MSc")
+- `group` (character): Training group ("LDP" or "Other")
+- `os_score` (integer): Open science score (0-4)
+- `os_score_ord` (ordered factor): Ordinal version of os_score
+
+**Dimensions:** Varies (typically 100-400 rows)
+
+**Generation:** Created by `scripts/00_LDP_simulate_dataset.R`
+
+---
+
+## `power_analysis/` - Power Analysis Results
+
+### `power_analysis_results_one_sided.csv`
+
+Statistical power estimates for different study design scenarios.
+
+**Variables:**
+- `n_institutions` (integer): Number of institutions in design (6, 8, 10)
+- `n_per_group_per_inst` (integer): Observations per group per institution (2, 4, 6)
+- `total_n` (integer): Total sample size (n_institutions × n_per_group × 2 groups × 2 career stages)
+- `true_or` (numeric): True odds ratio used in simulation (1.2, 1.5, 2.0, 2.5)
+- `power` (numeric): Estimated statistical power (proportion of significant tests)
+- `convergence_rate` (numeric): Proportion of simulated models that converged successfully (0-1). Values < 0.90 indicate potential issues with the design (e.g., sample size too small) and may result in unreliable power estimates. The power calculation is based only on converged models.
+
+**Dimensions:** ~ 36 rows (3 institutions × 3 sample sizes x 4 effect sizes)
+
+**Generation:** Created by `scripts/01_ldp_power_analysis.R` (500 simulations per scenario)
+
+**Usage:** Evaluate whether proposed study design has adequate power to detect effects
+
+---
+
+### `required_effect_sizes_one_sided.csv`
+
+Minimum detectable effect sizes (odds ratios) for 80% power across different study designs.
+
+**Variables:**
+- `n_institutions` (integer): Number of institutions (6, 8, 10)
+- `n_per_group_per_inst` (integer): Observations per group per institution (2, 4, 6)
+- `total_n` (integer): Total sample size
+- `required_or` (numeric): Minimum odds ratio detectable with 80% power
+- `achieved_power` (numeric): Actual power achieved (should be ≈0.80)
+
+**Dimensions:** ~ 9 rows (3 institutions × 3 sample sizes)
+
+**Generation:** Created by `scripts/01_ldp_power_analysis.R` via binary search
+
+**Usage:** Determine minimum effect size that can be reliably detected
+
+---
+
+### `power_analysis_results_simple.csv`
+
+Statistical power estimates for the **simplified model** (program as fixed effect, no institution random effect).
+
+**Variables:**
+- `n_institutions` (integer): Number of institutions in design (6, 8, 10)
+- `n_per_group_per_inst` (integer): Observations per group per institution (2, 4, 6)
+- `total_n` (integer): Total sample size
+- `true_or` (numeric): True odds ratio used in simulation (1.2, 1.5, 2.0, 2.5)
+- `power` (numeric): Estimated statistical power (proportion of significant tests)
+- `convergence_rate` (numeric): Proportion of simulated models that converged successfully (0-1). Should be near 1.0 for simplified model, indicating improved convergence compared to complex model.
+
+**Model:** `score ~ group + program` (cumulative link model with program as fixed effect)
+
+**Dimensions:** ~36 rows (3 institutions × 3 sample sizes × 4 effect sizes)
+
+**Generation:** Created by `scripts/01b_ldp_power_analysis_simple.R` (500 simulations per scenario)
+
+**Usage:** Compare convergence rates and power with complex model; evaluate feasibility of simplified analysis approach
+
+---
+
+### `required_effect_sizes_simple.csv`
+
+Minimum detectable effect sizes for 80% power using the **simplified model**.
+
+**Variables:**
+- `n_institutions` (integer): Number of institutions (6, 8, 10)
+- `n_per_group_per_inst` (integer): Observations per group per institution (2, 4, 6)
+- `total_n` (integer): Total sample size
+- `required_or` (numeric): Minimum odds ratio detectable with 80% power
+- `achieved_power` (numeric): Actual power achieved (should be ≈0.80)
+
+**Model:** `score ~ group + program` (no random effects)
+
+**Dimensions:** ~9 rows (3 institutions × 3 sample sizes)
+
+**Generation:** Created by `scripts/01b_ldp_power_analysis_simple.R` via binary search
+
+**Usage:** Determine minimum detectable effects with simplified model; compare with complex model requirements
+
+---
+
+## `workflow_results/` - Complete Workflow Outputs
+
+Generated by `scripts/run_example_workflow.R` - demonstrates full analysis pipeline.
+
+### `simulated_data.csv` and `simulated_data.rds`
+
+Simulated dataset used in example workflow.
+
+**Format:** Same structure as `simulated/example_dataset_for_preregistration.csv`
+
+**Dimensions:** Typically 100-200 rows
+
+**Generation:** Step 1 of workflow (calls `scripts/00_LDP_simulate_dataset.R`)
+
+---
+
+### `fitted_model.rds`
+
+Fitted cumulative link mixed model (R object).
+
+**Class:** `clmm` (from ordinal package)
+
+**Model formula:** `os_score_ord ~ group + (1|stratum)`
+
+**Generation:** Step 2 of workflow (`scripts/02_ldp_hypothesis_test.R`)
+
+**Usage:** Load with `readRDS()` for post-hoc analysis, predictions, or diagnostics
+
+---
+
+### `hypothesis_results.csv`
+
+One-sided hypothesis test results.
+
+**Variables:**
+- `statistic` (character): Name of test statistic
+  - `"log_or_estimate"`: Log odds ratio (coefficient from model)
+  - `"se_log_or"`: Standard error of log OR
+  - `"z_statistic"`: Z-test statistic
+  - `"or_estimate"`: Odds ratio representing LDP vs Other. Values > 1 indicate LDP group has higher odds of higher open science scores.
+  - `"or_lower"`: Lower bound of one-sided 95% CI
+  - `"p_value_one_sided"`: One-sided p-value (H₁: OR > 1)
+  - `"decision"`: Test decision ("Reject H0" or "Fail to reject H0")
+- `value` (character): Value of the statistic (stored as text)
+
+**Dimensions:** 7 rows × 2 columns
+
+**Generation:** Step 2 of workflow (complex model with random effects)
+
+---
+
+### `hypothesis_results_simple.csv`
+
+One-sided hypothesis test results for the **simplified model** (program as fixed effect, no random effects).
+
+**Variables:**
+- `statistic` (character): Name of test statistic (same structure as `hypothesis_results.csv`)
+  - `"log_or_estimate"`: Log odds ratio (coefficient from model)
+  - `"se_log_or"`: Standard error of log OR
+  - `"z_statistic"`: Z-test statistic
+  - `"or_estimate"`: Odds ratio representing LDP vs Other. Values > 1 indicate LDP group has higher odds of higher open science scores.
+  - `"or_lower"`: Lower bound of one-sided 95% CI
+  - `"p_value_one_sided"`: One-sided p-value (H₁: OR > 1)
+  - `"decision"`: Test decision ("Reject H0" or "Fail to reject H0")
+- `value` (character): Value of the statistic (stored as text)
+
+**Model:** `score ~ group + program` (cumulative link model without random effects)
+
+**Dimensions:** 7 rows × 2 columns
+
+**Generation:** Step 5 of workflow
+
+**Usage:** Compare with complex model results to validate that simplified model produces similar effect estimates; demonstrate model selection rationale
+
+---
+
+### `assumption_results.csv`
+
+Model assumption test results and descriptive statistics.
+
+**Variables:**
+- `test` (character): Type of test/statistic
+  - `"proportional_odds"`: Proportional odds assumption
+  - `"scale_effects"`: Variance homogeneity
+  - `"random_effects"`: Random effect summary
+  - `"variance_ratio"`: Descriptive variance comparison
+  - `"group_means"`: Descriptive group means
+- `statistic` (numeric): Test statistic (LRT or descriptive value)
+- `p_value` (numeric): P-value (NA for descriptive stats)
+- `n_strata` (numeric): Number of random effect strata
+- `ranef_sd` (numeric): Standard deviation of random effects
+- `ldp_mean` (numeric): Mean score for LDP group
+- `other_mean` (numeric): Mean score for Other group
+
+**Dimensions:** 5 rows × 7 columns
+
+**Generation:** Step 3 of workflow (`scripts/03_ldp_assumptions_check.R`)
+
+**Note:** Formal tests (nominal_test, scale_test) may produce NA if unavailable
+
+---
+
+### `random_effects.csv`
+
+Extracted random effects for each stratum.
+
+**Variables:**
+- `stratum` (character): Stratum identifier (institution × career stage)
+- `random_effect` (numeric): Best linear unbiased predictor (BLUP) for stratum
+
+**Dimensions:** Number of rows = number of strata
+
+**Generation:** Step 3 of workflow
+
+**Usage:** Q-Q plots, checking normality of random effects
+
+---
+
+### `group_variances.csv`
+
+Descriptive statistics by group for variance comparison.
+
+**Variables:**
+- `group` (character): Training group ("LDP" or "Other")
+- `mean_score` (numeric): Mean open science score
+- `sd_score` (numeric): Standard deviation
+- `var_score` (numeric): Variance
+
+**Dimensions:** 2 rows × 4 columns
+
+**Generation:** Step 3 of workflow
+
+**Usage:** Descriptive assessment of variance homogeneity
+
+---
+
+### `observed_distribution.csv`
+
+Observed frequency distribution of scores by group.
+
+**Variables:**
+- `group` (character): Training group
+- `os_score` (integer): Open science score (0-4)
+- `n` (integer): Count of observations
+- `proportion` (numeric): Proportion within group
+
+**Dimensions:** 10 rows (2 groups × 5 score levels)
+
+**Generation:** Step 4 of workflow
+
+**Usage:** Visualizing observed score distributions
+
+---
+
+### `predicted_probabilities.csv`
+
+Model-predicted probabilities for each score level by group.
+
+**Variables:**
+- `group` (character): Training group
+- `os_score` (integer): Open science score (0-4)
+- `prob` (numeric): Predicted probability of this score
+
+**Dimensions:** 10 rows (2 groups × 5 score levels)
+
+**Generation:** Step 4 of workflow (`scripts/04_ldp_visualizations.R`)
+
+**Method:** Computed from model parameters (thresholds and group effect)
+
+**Usage:** Primary visualization of treatment effect
+
+---
+
+### `odds_ratio_contrast.csv`
+
+Odds ratio estimate from emmeans contrast.
+
+**Variables:**
+- `contrast` (character): Contrast label ("LDP / Other")
+- `odds_ratio` (numeric): Estimated odds ratio
+- `or_lower` (numeric): Lower 95% CI bound
+- `or_upper` (numeric): Upper 95% CI bound
+
+**Dimensions:** 1 row × 4 columns
+
+**Generation:** Step 4 of workflow
+
+**Usage:** Alternative format for odds ratio with CI (currently not visualized in main document)
+
+---
+
+## Data Generation and Reproducibility
+
+All data files can be regenerated by running:
+
+```r
+# Generate power analysis data
+source("scripts/01_ldp_power_analysis.R")
+
+# Generate workflow results
+source("scripts/run_example_workflow.R")
+```
+
+**Seeds:** Analysis uses `set.seed(123)` for reproducibility
+
+**Simulation parameters:**
+- Power analysis: 500 iterations per scenario
+- Example workflow: 10 institutions, 4-10 LDP students per institution
+- Target OR for example: 1.3
+- Random effect SD: 0.5
+
+---
+
+## Variable Naming Conventions
+
+- `os_score`: Raw integer score (0-4)
+- `os_score_ord`: Ordered factor version for modeling
+- `group`: "LDP" (treatment) or "Other" (control)
+- `stratum`: Institution × career stage combination
+- `or_*`: Odds ratio related measures
+- `log_or_*`: Log odds ratio (model scale)
+
+---
+
+## Missing Data
+
+- `NA` in formal test results (`nominal_test`, `scale_test`) indicates tests are unavailable with small sample sizes due to insufficient data for the internal model comparisons these tests require
+- All other variables should have no missing values in simulated data
+- Real data may contain missing values depending on data collection
+
+---
+
+## Updates
+
+**Last updated:** 2026-02-10
+
+**Version:** 1.0 - Initial data dictionary for pre-registration
