@@ -24,7 +24,7 @@ This document describes the pre-registered design and analysis plan for evaluati
 
 ## Research Question
 
-Does training in open science practices (through the Living Data Project courses) lead to higher open science practice adoption rates in subsequent research publications, compared to researchers without such training?
+Within research publications, are adoption rates of open science practices higher among researchers (publication authors) who received relevant training (through the Living Data Project courses) compared to researchers who did not receive such training?
 
 ## Study Design
 
@@ -53,6 +53,8 @@ These represent four of the five indicators used by PLOS in their [Open Science 
 **Variable type:** Binary categorical (fixed effect in model)
 
 ## Blocking Variables
+
+If sample sizes permit, we will include the following blocking variables: 
 
 - **Institution**: Academic institution where degree was completed
 - **Program level**: MSc or PhD
