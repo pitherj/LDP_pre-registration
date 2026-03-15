@@ -4,7 +4,7 @@ This repository contains the analysis (and associated data and code) for the pre
 
 ## Overview
 
-**Research Question:** Does training in open science practices (through the Living Data Project courses) lead to higher open science practice adoption rates in subsequent research publications, compared to researchers without such training?
+**Research Question:** Within research publications, are adoption rates of open science practices higher among researchers (publication authors) who received relevant training (through the Living Data Project courses) compared to researchers who did not receive such training?
 
 **Study Design:** Matched-groups observational study using cumulative link mixed models (CLMM) to compare open science indicators in publications.
 
