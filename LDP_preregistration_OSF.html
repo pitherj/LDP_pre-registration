@@ -545,13 +545,14 @@ student names to author records.</p>
 <p><strong>Identification of control student-authors:</strong> Control
 student-authors are identified using a text-based machine learning
 classifier (trained on thesis titles and abstracts) that identifies EEE
-graduate students from Canadian post-secondary institutions. Candidate
-controls must: (1) be enrolled at an LDP-affiliated institution, (2)
-have a thesis deposit year within the range 2022–2024, and (3) have at
-least one first-author peer-reviewed research article. Controls must not
-have participated in any LDP course. Program level (MSc or PhD) is
-recorded where available but is not used as a matching criterion, as it
-is incomplete across LDP students.</p>
+graduate students from Canadian post-secondary institutions (see
+associated GitHub repo <a href="https://github.com/pitherj/LDP_thesis_classification">here</a>).
+Candidate controls must: (1) be enrolled at an LDP-affiliated
+institution, (2) have a thesis deposit year within the range 2022–2024,
+and (3) have at least one first-author peer-reviewed research article.
+Controls must not have participated in any LDP course. Program level
+(MSc or PhD) is recorded where available but is not used as a matching
+criterion, as it is incomplete across LDP students.</p>
 <p><strong>Publication selection:</strong> For each eligible
 student-author (LDP or control), one first-author peer-reviewed research
 article is selected at random (using the pre-specified seed) when
@@ -959,11 +960,11 @@ UBC Behavioural Research Ethics Board (UBC BREB) on 2026-01-06.</p>
 analysis plan that occur during the study will be documented with
 justifications in the final manuscript.</p>
 <p><strong>Related work:</strong> The thesis classification pipeline
-used to identify control authors is described in a companion repository
-(see project documentation). The pipeline uses a text-based machine
-learning classifier trained on Canadian graduate thesis metadata to
-identify EEE students, followed by author and publication disambiguation
-via the OpenAlex API.</p>
+used to identify control authors is described in a <a href="https://github.com/pitherj/LDP_thesis_classification">companion
+repository</a>. The pipeline uses a text-based machine learning
+classifier trained on Canadian graduate thesis metadata to identify EEE
+students, followed by author and publication disambiguation via the
+OpenAlex API.</p>
 <p><strong>Key references:</strong></p>
 <ul>
 <li>Wilkinson, M.D., et al. (2016). The FAIR Guiding Principles for

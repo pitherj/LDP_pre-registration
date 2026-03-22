@@ -109,7 +109,7 @@ The publication lists (the inputs to scoring) have been assembled prior to pre-r
 LDP student-authors are identified from course enrollment records for LDP cohorts 2020–2022. A student is eligible if they are the first author on at least one peer-reviewed research article published in a scholarly journal. Publications are identified using the OpenAlex API, matching student names to author records.
 
 **Identification of control student-authors:**
-Control student-authors are identified using a text-based machine learning classifier (trained on thesis titles and abstracts) that identifies EEE graduate students from Canadian post-secondary institutions. Candidate controls must: (1) be enrolled at an LDP-affiliated institution, (2) have a thesis deposit year within the range 2022–2024, and (3) have at least one first-author peer-reviewed research article. Controls must not have participated in any LDP course. Program level (MSc or PhD) is recorded where available but is not used as a matching criterion, as it is incomplete across LDP students.
+Control student-authors are identified using a text-based machine learning classifier (trained on thesis titles and abstracts) that identifies EEE graduate students from Canadian post-secondary institutions (see associated GitHub repo [here](https://github.com/pitherj/LDP_thesis_classification)). Candidate controls must: (1) be enrolled at an LDP-affiliated institution, (2) have a thesis deposit year within the range 2022–2024, and (3) have at least one first-author peer-reviewed research article. Controls must not have participated in any LDP course. Program level (MSc or PhD) is recorded where available but is not used as a matching criterion, as it is incomplete across LDP students.
 
 **Publication selection:**
 For each eligible student-author (LDP or control), one first-author peer-reviewed research article is selected at random (using the pre-specified seed) when multiple eligible publications exist.
@@ -348,7 +348,7 @@ The following analyses are pre-specified as exploratory (not confirmatory). Resu
 
 **Deviations:** Any deviations from this pre-registered analysis plan that occur during the study will be documented with justifications in the final manuscript.
 
-**Related work:** The thesis classification pipeline used to identify control authors is described in a companion repository (see project documentation). The pipeline uses a text-based machine learning classifier trained on Canadian graduate thesis metadata to identify EEE students, followed by author and publication disambiguation via the OpenAlex API.
+**Related work:** The thesis classification pipeline used to identify control authors is described in a [companion repository](https://github.com/pitherj/LDP_thesis_classification). The pipeline uses a text-based machine learning classifier trained on Canadian graduate thesis metadata to identify EEE students, followed by author and publication disambiguation via the OpenAlex API.
 
 **Key references:**
 
