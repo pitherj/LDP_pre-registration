@@ -1,6 +1,0 @@
-test,statistic,p_value,n_strata,ranef_sd,ldp_mean,other_mean
-proportional_odds,NA,NA,NA,NA,NA,NA
-scale_effects,NA,NA,NA,NA,NA,NA
-random_effects,NA,NA,16,0.2148582155065549,NA,NA
-variance_ratio,1.2140703517587934,NA,NA,NA,NA,NA
-group_means,NA,NA,NA,NA,1.1944444444444444,0.8888888888888888

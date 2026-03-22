@@ -1,194 +1,80 @@
-# Living Data Project: Pre-registration Analyses
+# Living Data Project: Pre-registration
 
-This repository contains the analysis (and associated data and code) for the pre-registration associated with the study "Assessing Open Science Practices Among Graduates of the Living Data Project, a Canada-wide Graduate Training Program".
+This repository contains the pre-registration document for the study:
+
+> **Assessing Open Science Practices Among Graduates of the Living Data Project, a Canada-wide Graduate Training Program**
 
 ## Overview
 
-**Research Question:** Within research publications, are adoption rates of open science practices higher among researchers (publication authors) who received relevant training (through the Living Data Project courses) compared to researchers who did not receive such training?
+**Research Question:** Are data archives associated with peer-reviewed publications authored by graduates of the Living Data Project (LDP) — who received structured training in open science and FAIR data practices — more FAIR-compliant than those associated with publications from matched control graduates who did not receive such training?
 
-**Study Design:** Matched-groups observational study using cumulative link mixed models (CLMM) to compare open science indicators in publications.
+**Study Design:** Paired, matched-groups observational study. Each of 60 LDP student first-authors is matched one-to-one with a control student-author from the same institution. The primary outcome is a FAIR compliance score (0–10) assessed independently by three raters using a standardized checklist.
+
+**Primary test:** One-sided Wilcoxon signed-rank test on within-pair differences (LDP minus matched control), α = 0.05.
 
 ## Project Structure
 
 ```
 .
-├── LDP_preregistration.qmd       # Main pre-registration document (Quarto)
-├── LDP_preregistration.html      # Rendered HTML output
-├── _README.md                    # This file
-├── scripts/                      # All R analysis scripts
-├── data/                         # All data files (with subdirectories)
-├── figures/                      # All figure outputs
+├── LDP_preregistration_OSF.md      # Pre-registration document (OSF submission version)
+├── osf_preregistration_template.md # OSF pre-registration template (reference)
+└── README.md                       # This file
 ```
 
-## Key Files
+## Main Document
 
-### Main Document
+**`LDP_preregistration_OSF.md`** — The pre-registration document formatted for submission to OSF. Contains the full study description, hypotheses, design plan, sampling plan, variable definitions, FAIR compliance checklist, and analysis plan.
 
-- **`LDP_preregistration.qmd`** - Pre-registration document containing hypotheses, study design, analysis plan, power analysis, and example workflow
-- **`LDP_preregistration.html`** - Rendered HTML version of the pre-registration
+## Study Design Summary
 
-### R Scripts (`scripts/`)
+| Feature | Detail |
+|---|---|
+| Design | Matched-groups observational study |
+| Unit of analysis | Publication (one per student-author) |
+| Unit of inference | Within-institution matched pair |
+| Groups | LDP graduates (n = 60) vs. matched controls (n = 60) |
+| Institutions | 7 (majority: UBC n = 33, McGill n = 20) |
+| Matching criteria | Same institution; overlapping thesis deposit years (2022–2024) |
+| Outcome | FAIR compliance score (0–10), mean of 3 raters |
+| Primary test | One-sided paired t-test on paired differences (Wilcoxon signed-rank if normality violated) |
+| Effect size | Cohen's *d* (Hodges-Lehmann pseudo-median if Wilcoxon substituted) |
+| Significance level | α = 0.05, one-sided |
+| IRR measures | ICC (two-way mixed, absolute agreement) and Krippendorff's α |
 
-Analysis scripts are numbered sequentially:
+## FAIR Compliance Checklist (0–10)
 
-1. **`00_LDP_simulate_dataset.R`** - Functions for generating realistic simulated data
-2. **`01_ldp_power_analysis.R`** - Power analysis with mixed effects model (institution × program random effect)
-3. **`01b_ldp_power_analysis_simple.R`** - Power analysis with simplified model (program fixed effect only)
-4. **`02_ldp_hypothesis_test.R`** - Hypothesis testing using CLMM
-5. **`03_ldp_assumptions_check.R`** - Model assumption testing
-6. **`04_ldp_visualizations.R`** - Visualization functions
-7. **`run_example_workflow.R`** - Complete workflow orchestrator
+| Component | Type | Max |
+|---|---|---|
+| Findable — data availability statement (structured vs. unstructured vs. absent) | Ordinal (2/1/0) | 2 |
+| Accessible — data downloadable or access protocols articulated | Binary | 1 |
+| Interoperable — data in open specification format | Binary | 1 |
+| Reusable — file formats identified | Binary | 1 |
+| Reusable — collection protocols or data source documented | Binary | 1 |
+| Reusable — processing is scripted and documented | Binary | 1 |
+| Reusable — all variables described | Binary | 1 |
+| Reusable — data accompanied by a license | Binary | 1 |
+| **Total** | | **10** |
 
-### Data Files (`data/`)
+## Blinding
 
-- **`simulated/`** - Simulated example datasets
-- **`power_analysis/`** - Power analysis results and required effect sizes
-- **`workflow_results/`** - Complete workflow outputs (fitted models, test results, etc.)
+Raters are **not** blinded to author identity. Data archives adhering to FAIR principles prominently identify contributors in their metadata, making author-identity blinding both impractical and contrary to the nature of the assessment objects. Rater bias is minimised by the checklist structure, which is predominantly binary/ordinal and leaves little room for subjective interpretation.
 
-See `data/_DATA-DICTIONARY.md` for detailed descriptions of all data files.
+Raters are partially blinded to group membership (LDP vs. Other); during rating, the raters may recognise names of students who completed the LDP courses. We expect this occurrence to be minimal.
 
-### Figures (`figures/`)
-
-Power analysis visualizations showing:
-- Statistical power across sample sizes and effect sizes
-- Minimum detectable effects for 80% power
-- Example score distributions for different odds ratios
-
-## Getting Started
-
-### Prerequisites
-
-Required R packages:
-```r
-install.packages(c("tidyverse", "ordinal", "emmeans", "patchwork", "furrr"))
-```
-
-### Running the Analysis
-
-#### Option 1: Run everything from fresh start
-
-```r
-# 1a. Generate power analysis - mixed effects model (takes ~10-20 minutes)
-source("scripts/01_ldp_power_analysis.R")
-
-# 1b. Generate power analysis - simplified model (takes ~10-20 minutes)
-source("scripts/01b_ldp_power_analysis_simple.R")
-
-# 2. Run example workflow (takes ~1-2 minutes)
-source("scripts/run_example_workflow.R")
-
-# 3. Render pre-registration document
-quarto::quarto_render("LDP_preregistration.qmd")
-```
-
-#### Option 2: Render with workflow embedded
-
-```r
-# Power analyses must be run first (generate figures)
-source("scripts/01_ldp_power_analysis.R")
-source("scripts/01b_ldp_power_analysis_simple.R")
-
-# Then render - this will run the workflow automatically
-quarto::quarto_render("LDP_preregistration.qmd")
-```
-
-### Quick Test
-
-To verify everything is working:
-
-```r
-# Generate example workflow results only
-source("scripts/run_example_workflow.R")
-
-# Render document (uses existing power figures)
-quarto::quarto_render("LDP_preregistration.qmd")
-```
-
-## Workflow Details
-
-### Power Analysis
-
-**Two power analyses are conducted to compare model complexity vs. convergence:**
-
-#### mixed effects model (`01_ldp_power_analysis.R`)
-- **Model:** `score ~ group + (1|stratum)` where stratum = institution × program
-- **Institutions:** 6, 8, 10
-- **Observations per group:** 2, 4, 6 per institution per career stage
-- **Effect sizes:** OR = 1.2, 1.5, 2.0, 2.5
-- **Issue:** Low convergence rates (< 0.90) indicate sample sizes insufficient for model complexity
-
-#### Simplified Model (`01b_ldp_power_analysis_simple.R`)
-- **Model:** `score ~ group + program` (program as fixed effect, no institution random effect)
-- **Same scenarios** as mixed effects model for direct comparison
-- **Advantage:** Dramatically improved convergence rates
-- **Trade-off:** Does not model institutional heterogeneity
-
-**Simulation details:**
-- 500 iterations per scenario
-- Runtime: ~10-20 minutes per analysis (parallel processing)
-
-**Outputs:**
-- Six PNG figures (3 per model, saved to `figures/`)
-- Four CSV files with power estimates (2 per model, saved to `data/power_analysis/`)
-
-### Example Workflow
-
-Demonstrates the complete analysis pipeline with both model approaches:
-1. Simulates realistic data with specified effect size
-2. Fits cumulative link mixed model (CLMM) with random effects
-3. Tests model assumptions (proportional odds, variance homogeneity)
-4. Conducts one-sided hypothesis test (mixed effects model)
-5. Fits and tests simplified model (program as fixed effect)
-6. Creates visualizations of predicted probabilities
-
-The workflow demonstrates both the complex and simplified models, showing that they produce similar treatment effect estimates while the simplified model avoids convergence issues.
-
-**Outputs:** All results saved to `data/workflow_results/` (11 files including both model results)
-
-## Model Specifications
-
-**Statistical model:** Cumulative link mixed model with logit link
-```
-os_score ~ group + (1|stratum)
-```
-
-Where:
-- `os_score`: Ordinal response (0-4, count of open science practices)
-- `group`: Fixed effect (LDP vs Other)
-- `stratum`: Random effect (institution × program level)
-
-**Hypothesis test:** One-sided Wald test at α = 0.05
-
-**Assumption tests:**
-- Proportional odds: `ordinal::nominal_test()`
-- Variance homogeneity: `ordinal::scale_test()`
-
-## Data Description
-
-The open science score (0-4) counts four practices:
-1. Data sharing (repositories)
-2. Code sharing (public availability)
-3. Preprint sharing
-4. Study registration
-
-Based on PLOS Open Science Indicators (excluding protocol sharing).
+Raters are blind to each other's scores throughout the independent rating phase.
 
 ## Authors
 
-Jason Pither, Mathew Vis-Dunbar, and Diane Srivastava
+Jason Pither, Mathew Vis-Dunbar, Sandra Emry, David Hunt, Diane Srivastava
 
 ## License
 
-MIT License
-
-## Citation
-
-[PLACEHOLDER: Add citation information]
+CC-By Attribution 4.0 International
 
 ## Contact
 
 Jason Pither (jason [dot] pither <at> ubc [dot] ca)
 
-## Acknowledgments
+## Acknowledgements
 
 This work was financially supported by NSERC CREATE and the Canadian Institute for Ecology & Evolution.
