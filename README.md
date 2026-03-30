@@ -88,7 +88,7 @@ Jason Pither, Mathew Vis-Dunbar, Sandra Emry, David Hunt, Diane Srivastava
 
 ## License
 
-CC-By Attribution 4.0 International
+[CC-BY-NC 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/deed.en)
 
 ## Contact
 
