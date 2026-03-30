@@ -28,8 +28,6 @@ FAIR compliance is assessed by three to five trained raters using a standardized
 
 - Jason Pither ([0000-0002-7490-6839](https://orcid.org/0000-0002-7490-6839))
 - Mathew Vis-Dunbar ([0000-0001-6541-9660](https://orcid.org/0000-0001-6541-9660))
-- Sandra Michelle Emry ([0000-0001-6882-2105](https://orcid.org/0000-0001-6882-2105))
-- David AGA Hunt ([0000-0002-7771-8569](https://orcid.org/0000-0002-7771-8569))
 - Diane Srivastava ([0000-0003-4541-5595](https://orcid.org/0000-0003-4541-5595))
 
 **License**
