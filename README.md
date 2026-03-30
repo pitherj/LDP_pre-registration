@@ -79,6 +79,8 @@ Raters are blind to each other's scores throughout the independent rating phase.
 
 Jason Pither, Mathew Vis-Dunbar, Sandra Emry, David Hunt, Diane Srivastava
 
+**AI usage**: Claude Code (Sonnet 4.6) contributed to coding and ensuring computational reproducibility, with oversight by Jason Pither.  
+
 ## License
 
 CC-By Attribution 4.0 International
