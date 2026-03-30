@@ -4,6 +4,17 @@ This repository contains the pre-registration document for the study:
 
 > **Assessing Open Science Practices Among Graduates of the Living Data Project, a Canada-wide Graduate Training Program**
 
+
+## Project Timeline
+
+| Date | Activity |
+|------|----------|
+| 2025-10-10 | Project conceived |
+| 2026-01-06 | Ethics approval (UBC BREB) |
+| 2026-01-13 | Pre-registration initiated |
+| 2026-01-13 | README created |
+| 2026-03-30 | README last updated |
+
 ## Overview
 
 **Research Question:** Are data archives associated with peer-reviewed publications authored by graduates of the Living Data Project (LDP) — who received structured training in open science and FAIR data practices — more FAIR-compliant than those associated with publications from matched control graduates who did not receive such training?
