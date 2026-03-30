@@ -19,7 +19,7 @@ This repository contains the pre-registration document for the study:
 
 **Research Question:** Are data archives associated with peer-reviewed publications authored by graduates of the Living Data Project (LDP) — who received structured training in open science and FAIR data practices — more FAIR-compliant than those associated with publications from matched control graduates who did not receive such training?
 
-**Study Design:** Paired, matched-groups observational study. 21 LDP student first-authors are each matched one-to-one with a control student-author from the same institution and same publication year. The primary outcome is a FAIR compliance score (0–4) assessed independently by three to five raters (k = 3–5) using a standardized checklist.
+**Study Design:** Paired, matched-groups observational study. 21 LDP student first-authors are each matched one-to-one with a control student-author from the same institution and same publication year. The primary outcome is a FAIR compliance score (0–4) assessed independently by three to five raters (k = 3–5) using a standardised checklist.
 
 **Primary test:** One-sided paired t-test on within-pair differences (LDP minus matched control), α = 0.05. A permutation test (sign-flip) is substituted if normality of paired differences is violated.
 

@@ -8,7 +8,7 @@ The goal is evaluation of data attached to a publication for its adherence to FA
 
 It is also being assumed here that the FAIR principles are being used for publication findings verification; data re-use in another application is tertiary to this. This then necessarily implies some looser restrictions that include limited time window for continued validation of data, subject matter familiarity with data types and software, norms on the use of certain binary data types, etc.
 
-Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalized for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
+Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalised for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
 
 ## Guide
 
@@ -24,7 +24,7 @@ The publication is the conduit to the data in this context, so the data need not
 
 ### Accessible
 
-Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply dur diligence on the part of the researcher, and this should not be penalized.
+Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply dur diligence on the part of the researcher, and this should not be penalised.
 
 For data that are not restricted access, accessible will be interpreted as the data can be downloaded or recreated programmatically (a script is provided that does not require debugging), and clear instructions are provided for doing so. Additionally, if data are generated, this generation should be operating system agnostic (Linux, Mac, Windows) and should not rely on software behind a paywall. However, hardware limitations may reasonably prevent a laptop or desktop computer from generating the data. Lastly, access in this way may change over time; this evaluation is not measuring how 'future proofed' this access is, only if it can be accessed at the point in time that access is being verified.
 
@@ -49,7 +49,7 @@ Interoperable implies that data can be used across systems; systems here will be
 
 ### Reusable
 
-Reusability is characterized by two key aspects: a) the ability to understand the data; b) knowledge of how the data may or may not be reused. Both should remove all guess work and the need to make assumptions about the data.
+Reusability is characterised by two key aspects: a) the ability to understand the data; b) knowledge of how the data may or may not be reused. Both should remove all guess work and the need to make assumptions about the data.
 
 The former is reliant on data documentation that, among other things, establishes the provenance, and hence acts as a marker of trust, in the acquisition and processing of the data. Documentation may be embedded with the data or standalone, and, at a minimum captures the following.
 

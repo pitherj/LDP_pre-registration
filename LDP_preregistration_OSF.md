@@ -1,3 +1,9 @@
+---
+output:
+  pdf_document:
+    latex_engine: xelatex
+  html_document: default
+---
 # OSF Pre-registration
 
 ---
@@ -16,11 +22,15 @@ The LDP offered formal graduate courses to enhance research transparency and rep
 
 To evaluate whether the training provided by the LDP has made a difference, we conduct a quasi-experimental, matched-groups study comparing FAIR compliance scores of research data associated with publications authored by LDP trainees versus matched controls. Controls are graduate students from the same institutions who did not receive LDP training, and who completed theses in EEE.  The latter are identified using a text-based thesis classifier applied to Canadian thesis metadata, with author publications retrieved via the OpenAlex API.
 
-FAIR compliance is assessed by three to five trained raters using a standardized FAIR compliance checklist, producing a composite score (0–4) for each publication. We focus on the first three cohorts of LDP graduates (2020–2022), as these are the most likely to have a sufficient number of published research outputs.
+FAIR compliance is assessed by three to five trained raters using a standardised FAIR compliance checklist, producing a composite score (0–4) for each publication. We focus on the first three cohorts of LDP graduates (2020–2022), as these are the most likely to have a sufficient number of published research outputs.
 
 **Contributors**
 
-Jason Pither, Mathew Vis-Dunbar, Sandra Emry, David Hunt, Diane Srivastava
+- Jason Pither ([0000-0002-7490-6839](https://orcid.org/0000-0002-7490-6839))
+- Mathew Vis-Dunbar ([0000-0001-6541-9660](https://orcid.org/0000-0001-6541-9660))
+- Sandra Michelle Emry ([0000-0001-6882-2105](https://orcid.org/0000-0001-6882-2105))
+- David AGA Hunt ([0000-0002-7771-8569](https://orcid.org/0000-0002-7771-8569))
+- Diane Srivastava ([0000-0003-4541-5595](https://orcid.org/0000-0003-4541-5595))
 
 **License**
 
@@ -46,8 +56,8 @@ If the LDP training was effective, then the FAIR compliance scores of research d
 
 Formally:
 
-- **H₀:** The mean paired difference in FAIR compliance score (LDP minus matched control, within institution) is zero. (δ = 0)
-- **Hₐ:** The mean paired difference in FAIR compliance score is positive — LDP publications score higher than their matched controls. (δ > 0)
+- **H~0~:** The mean paired difference in FAIR compliance score (LDP minus matched control, within institution) is zero. (mu~D~ = 0)
+- **H~a~:** The mean paired difference in FAIR compliance score is positive — LDP publications score higher than their matched controls. (mu~D~ > 0)
 
 **Justification for directional hypothesis:** There is no theoretical basis for expecting that structured training in open science practices would decrease the adoption of FAIR data practices below the level observed in a general population of recently graduated EEE students.
 
@@ -57,7 +67,7 @@ Formally:
 
 ### Study Type
 
-Observational Study — Data are collected from study units (published research articles) that are not randomly assigned to a treatment. The "treatment" (LDP training) was received by students as part of their graduate program; group assignment is observational, not randomized.
+Observational Study — Data are collected from study units (published research articles) that are not randomly assigned to a treatment. The "treatment" (LDP training) was received by students as part of their graduate program; group assignment is observational, not randomised.
 
 We use a matched-groups (quasi-experimental) design.
 
@@ -65,7 +75,7 @@ We use a matched-groups (quasi-experimental) design.
 
 - Raters are not blinded to author identity. Data archives that adhere to FAIR principles will, by design, prominently identify contributors and authors in their metadata; attempting to conceal these identifiers would be both impractical and contrary to the nature of the assessment objects.
 - The potential for rater bias introduced by knowledge of author identity is considered minimal, given that the FAIR assessment checklist comprises predominantly binary and ordinal items (e.g., is a data availability statement present? are the data in an open format? is a license provided?) that leave little room for subjective interpretation.
-- Raters are partially blinded to group membership (LDP vs. Other); during rating, the raters may recognize names of students who completed the LDP courses. We expect this occurrence to be minimal. 
+- Raters are partially blinded to group membership (LDP vs. Other); during rating, the raters may recognise names of students who completed the LDP courses. We expect this occurrence to be minimal. 
 
 ### Is there any additional blinding in this study?
 
@@ -79,11 +89,11 @@ Matching criteria are: (1) same academic institution and (2) same publication ye
 
 Within each institution, LDP and control publications are randomly paired one-to-one, constrained to the same publication year. The comparator pool is oversampled at 2 × N_target per institution to ensure year-coverage across all LDP publication years. LDP student-authors without a year-matched comparator are excluded; the number of such exclusions is reported. Complete 1:1 pairing within each year is not guaranteed and depends on comparator availability.
 
-### Randomization
+### Randomisation
 
 This is an observational study; subjects are not randomly assigned to groups.
 
-However, randomization is used in three places, all using a single pre-specified random seed (**seed = 20260329**):
+However, randomisation is used in three places, all using a single pre-specified random seed (**seed = 20260329**):
 
 1. **LDP publication selection:** For each LDP student-author with multiple eligible publications, one is selected at random. The calendar year of the selected publication (Year *Y*) determines which comparator publications are eligible for pairing.
 
@@ -101,7 +111,7 @@ Registration prior to creation of data — As of the date of submission of this 
 
 ### Explanation of Existing Data
 
-The publication lists (the inputs to scoring) have been assembled prior to pre-registration as a necessary step in study design (to determine the achievable sample size). However, no FAIR compliance scores have been calculated or observed, and no outcome data has been analyzed. The research team has not examined any open science or FAIR-related characteristics of the identified publications.
+The publication lists (the inputs to scoring) have been assembled prior to pre-registration as a necessary step in study design (to determine the achievable sample size and thus requisite time for rater assessments). However, no FAIR compliance scores have been calculated or observed, and no outcome data has been analysed. The research team has not examined any open science or FAIR-related characteristics of the identified publications.
 
 ### Data Collection Procedures
 
@@ -115,7 +125,7 @@ Control student-authors are identified using a text-based machine learning class
 For each eligible LDP student-author, one first-author peer-reviewed research article is selected at random (using the pre-specified seed) when multiple eligible publications exist. The calendar year of that selected publication (Year *Y*) is recorded. For the matched comparator at the same institution, one publication from Year *Y* is then selected at random from that comparator's available qualifying publications. This year-matched selection ensures that each LDP–comparator pair is drawn from the same publication year, controlling for temporal changes in journal and publisher requirements for data sharing that could otherwise confound FAIR score comparisons. If a comparator has no qualifying publication in Year *Y*, that LDP student-author is excluded from the analysis (see Data Exclusion). The oversampled comparator pool (2 × N_target per institution) is intended to reduce the incidence of such exclusions.
 
 **FAIR compliance assessment:**
-Three to five trained raters (k = 3–5) independently evaluate each selected publication using the standardized FAIR compliance checklist. Raters are not informed of the group membership (LDP vs. Other) of the publications they assess; however, partial unblinding may occur if a rater recognises a student author as an LDP participant. Raters are blind to each other's scores throughout the independent rating phase. Ratings are conducted independently and collected before inter-rater reliability is assessed. Any item-level discrepancies will be noted but will not result in adjudication for the primary analysis (the mean of k raters' scores is used). Adjudicated consensus scores may be used in a sensitivity analysis.
+Three to five trained raters (k = 3–5) independently evaluate each selected publication using the standardised FAIR compliance checklist. Raters are not informed of the group membership (LDP vs. Other) of the publications they assess; however, partial unblinding may occur if a rater recognises a student author as an LDP participant. Raters are blind to each other's scores throughout the independent rating phase. Ratings are conducted independently and collected before inter-rater reliability is assessed. Any item-level discrepancies will be noted but will not result in adjudication for the primary analysis (the mean of k raters' scores is used). Adjudicated consensus scores may be used in a sensitivity analysis.
 
 **Inclusion criteria for publications:**
 - First-author publication by an eligible student-author
@@ -123,7 +133,7 @@ Three to five trained raters (k = 3–5) independently evaluate each selected pu
 - Published on or after January 1 of the year following the student's LDP course enrollment year (e.g., on or after 2021-01-01 for a student enrolled in the 2020 cohort); for controls, published on or after January 1, 2021 (the earliest applicable cutoff)
 
 **Exclusion criteria:**
-- Publications without accessible full text (required for FAIR assessment)
+- Publications for which full text is either not open-access, or not accessible via subscription to raters (this is not anticipated to be a problem; access required for FAIR assessment)
 - Publications in disciplines clearly outside EEE (based on classification above)
 
 ### Sample Size
@@ -138,13 +148,13 @@ The sample size is fixed by the number of eligible LDP graduates — it is not u
 
 **Power analysis (one-sided paired t-test, α = 0.05, n = 21 pairs):**
 
-Power for the paired t-test depends on the standard deviation of the within-pair differences (σ_D), not the standard deviation of the raw scores. Assuming σ_D ≈ 1.0 (a conservative estimate for a 0–4 bounded score when pairs share institutional context), the study has approximately:
-- 80% power to detect a mean paired difference of ≈ 0.57 points (d ≈ 0.57)
-- 90% power to detect a mean paired difference of ≈ 0.70 points (d ≈ 0.70)
+Power for the paired t-test depends on the standard deviation of the within-pair differences (SD~D~), not the standard deviation of the raw scores. Assuming SD~D~ ≈ 1.0 (a conservative estimate for a 0–4 bounded score when pairs share institutional context), the study has approximately:
+- 80% power to detect a mean paired difference of ≈ 0.57 points (Cohen's d ≈ 0.57)
+- 90% power to detect a mean paired difference of ≈ 0.70 points (Cohen's d ≈ 0.70)
 
-If the within-pair differences are less variable (e.g., σ_D ≈ 0.85), these thresholds are proportionally smaller (≈ 0.48 and ≈ 0.59 points respectively). Power estimates were obtained using `pwr::pwr.t.test(n = 21, sig.level = 0.05, type = "paired", alternative = "greater")`.
+If the within-pair differences are less variable (e.g., SD~D~ ≈ 0.85), these thresholds are proportionally smaller (≈ 0.48 and ≈ 0.59 points respectively). Power estimates were obtained using `pwr::pwr.t.test(n = 21, sig.level = 0.05, type = "paired", alternative = "greater")`.
 
-The study is adequately powered to detect moderate-to-large effects (d ≥ 0.57) but is underpowered for small effects (d < 0.4). The detectable effect sizes are considered plausible given the targeted nature of the LDP training; however, the inability to detect smaller effects is acknowledged as a limitation. The permutation test (sign-flip on paired differences) has power approaching that of the paired t-test under normality, so these estimates are approximately applicable to the backup test as well.
+The study is adequately powered to detect moderate-to-large effects (Cohen's d ≥ 0.57) but is underpowered for small effects (Cohen's d < 0.4). The detectable effect sizes are considered plausible given the targeted nature of the LDP training; however, the inability to detect smaller effects is acknowledged as a limitation. The permutation test (sign-flip on paired differences) has power approaching that of the paired t-test under normality, so these estimates are approximately applicable to the backup test as well.
 
 ### Stopping Rule
 
@@ -161,7 +171,7 @@ Not applicable. This is an observational study. The "treatment" (LDP training) w
 ### Measured Variables
 
 **Primary outcome variable — FAIR compliance score:**
-A composite score ranging from 0 to 4, representing the degree to which the data associated with a publication adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). Each of the four FAIR letters contributes a maximum of 1 point; sub-items within Reusable are scored in increments of 0.2, so non-integer values are possible. Assessed independently by k raters (k = 3–5) using the standardized FAIR compliance checklist. The variable used in primary analysis is the **mean of the k raters' scores** (a continuous value in [0, 4]).
+A composite score ranging from 0 to 4, representing the degree to which the data associated with a publication adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). Each of the four FAIR letters contributes a maximum of 1 point; sub-items within Reusable are scored in increments of 0.2, so non-integer values are possible. Assessed independently by k raters (k = 3–5) using the standardised FAIR compliance checklist. The variable used in primary analysis is the **mean of the k raters' scores** (a continuous value in [0, 4]).
 
 **Primary predictor — Training group:**
 Binary categorical variable: LDP (student completed LDP training) vs. Other (matched control without LDP training).
@@ -215,7 +225,7 @@ The goal is evaluation of data attached to a publication for its adherence to FA
 
 It is also being assumed here that the FAIR principles are being used for publication findings verification; data re-use in another application is tertiary to this. This then necessarily implies some looser restrictions that include limited time window for continued validation of data, subject matter familiarity with data types and software, norms on the use of certain binary data types, etc.
 
-Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalized for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
+Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalised for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
 
 ### Rating Guide
 
@@ -231,7 +241,7 @@ The publication is the conduit to the data in this context, so the data need not
 
 #### Accessible
 
-Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply due diligence on the part of the researcher, and this should not be penalized.
+Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply due diligence on the part of the researcher, and this should not be penalised.
 
 For data that are not restricted access, accessible will be interpreted as the data can be downloaded or recreated programmatically (a script is provided that does not require debugging), and clear instructions are provided for doing so. Additionally, if data are generated, this generation should be operating system agnostic (Linux, Mac, Windows) and should not rely on software behind a paywall. However, hardware limitations may reasonably prevent a laptop or desktop computer from generating the data. Lastly, access in this way may change over time; this evaluation is not measuring how 'future proofed' this access is, only if it can be accessed at the point in time that access is being verified.
 
@@ -256,7 +266,7 @@ Interoperable implies that data can be used across systems; systems here will be
 
 #### Reusable
 
-Reusability is characterized by two key aspects: (a) the ability to understand the data; (b) knowledge of how the data may or may not be reused. Both should remove all guesswork and the need to make assumptions about the data.
+Reusability is characterised by two key aspects: (a) the ability to understand the data; (b) knowledge of how the data may or may not be reused. Both should remove all guesswork and the need to make assumptions about the data.
 
 **A) Data Documentation**
 
@@ -340,15 +350,15 @@ D_i = fair_score_LDP_i - fair_score_Other_i
 
 where `fair_score` is the mean of k raters' scores (k = 3–5).
 
-Because the outcome is the mean of k independent raters' scores (k = 3–5) — rather than a single raw rating — the paired differences D_i are quasi-continuous and benefit from within-pair averaging that moves their distribution toward normality. The fractional sub-items within Reusable (0.2 increments) further improve distributional properties relative to a purely integer scale. At n = 21 pairs the Central Limit Theorem provides some robustness, though the small sample size means that the permutation sensitivity analysis is especially important. The paired t-test is therefore the preferred primary test: it directly tests the mean difference (which is the quantity of interest) and yields Cohen's *d* as an interpretable effect size. 
+Because the outcome is the mean of k independent raters' scores (k = 3–5) — rather than a single raw rating — the paired differences D_i are quasi-continuous and benefit from within-pair averaging that moves their distribution toward normality. At n = 21 pairs the Central Limit Theorem provides some robustness, though the small sample size means that the permutation sensitivity analysis is especially important. The paired t-test is therefore the preferred primary test: it directly tests the mean difference (which is the quantity of interest) and yields Cohen's *d* as an interpretable effect size. 
 
 **Assumption check (pre-specified):** Before interpreting the result, normality of the paired differences will be assessed using visual inspection (histogram and Q-Q plot). If visual inspection indicates meaningful departure from normality, the permutation test (Sensitivity Analysis 1 below) will be substituted as the primary inferential result.
 
-Test H₀: mean(D) = 0 against Hₐ: mean(D) > 0 at α = 0.05, implemented using `t.test(D, alternative = "greater", mu = 0)` in R.
+Test H~0~: mu~D~ = 0 against H~a~: mu~D~ > 0 at α = 0.05, implemented using `t.test(D, alternative = "greater", mu = 0)` in R.
 
 **Paired differences are computed from one pre-specified random pairing** (within-institution, **seed = 20260329**).
 
-**Effect size:** Cohen's *d* for paired differences, computed as mean(D) / sd(D), with a 95% confidence interval.
+**Effect size:** Cohen's *d* for paired differences, computed as mean(D~i~) / SD~D~, with a 95% confidence interval.
 
 **Example R code for primary analysis:**
 
@@ -388,7 +398,7 @@ cat(sprintf("Observed mean paired difference  = %.3f\n", obs_mean))
 
 1. **Permutation test on paired differences:** A one-sided permutation test applied to the same paired differences D_i. Under the null hypothesis, the LDP and control labels are exchangeable within each pair; the sign of each D_i is therefore randomly flipped (equivalent to swapping labels within pairs), and the mean of the permuted differences is recorded. The null distribution is constructed from 1000 such permutations (using the pre-specified seed). The p-value is the proportion of permuted mean differences ≥ the observed mean difference. Effect size is reported as the observed mean paired difference. Note: pairs with D_i = 0 contribute 0 to the permuted mean regardless of sign, which is correct — they carry no directional information. This test makes no distributional assumptions beyond exchangeability within pairs, an assumption met by the random within-institution pairing design. It is reported alongside the paired t-test in all cases, and substituted as the primary result if the normality assumption is violated (see above).
 
-2. **Repeated random pairing (robustness check):** Repeat the primary pairing and paired t-test 99 additional times (different random seeds, total = 100 pairings). Report the distribution of test statistics and the proportion of pairings with one-sided p < 0.05. Because the mean of paired differences equals the difference of group means (invariant to specific pairing), variation across pairings reflects sensitivity of the variance estimate — not the location estimate — to arbitrary within-institution pairing choices.
+2. **Repeated random pairing (robustness check):** Addresses the question: *"Is the p-value conclusion sensitive to which specific LDP publication happened to be matched to which specific comparator, within the same institution and year?"* This is distinct from the permutation test, which fixes the pairing and randomises labels; here the labels are fixed and the pairing is randomised. The primary pairing and paired t-test are repeated 99 additional times using different random seeds (total = 100 pairings). The distribution of t-statistics and the proportion of pairings with one-sided p < 0.05 are reported. Because the mean of paired differences equals the difference of group means regardless of how pairs are formed, variation across pairings reflects sensitivity of the variance estimate — not the mean paired difference — to arbitrary within-institution pairing choices.
 
 3. **Per-rater analysis:** Repeat the primary paired test using each individual rater's scores (rather than the mean of k raters) to assess robustness to rater effects.
 
@@ -403,11 +413,11 @@ No transformations of the outcome are planned. The `fair_score` variable is the 
 - **Significance threshold:** α = 0.05, one-sided
 - **Primary test:** One-sided paired t-test on paired differences; permutation test substituted if normality assumption is violated
 - **Reported statistics:** Mean paired difference with 95% CI; Cohen's *d*; one-sided p-value; permutation test p-value and observed mean paired difference reported alongside as a sensitivity check; distribution of test statistics across 100 random pairings
-- **No multiple comparisons correction** is applied to the primary test, as there is a single pre-registered confirmatory hypothesis. Exploratory component-score analyses will be clearly labeled as exploratory and interpreted accordingly.
+- **No multiple comparisons correction** is applied to the primary test, as there is a single pre-registered confirmatory hypothesis. Exploratory component-score analyses will be clearly labelled as exploratory and interpreted accordingly.
 
 ### Data Exclusion
 
-- Publications without accessible full text will be excluded from FAIR assessment and replaced with the next eligible publication for that student in the same year (if available); if no same-year replacement exists, the student-author is excluded.
+- Publications without accessible full text (either via Open Access or subscription) will be excluded from FAIR assessment and replaced with the next eligible publication for that student in the same year (if available); if no same-year replacement exists, the student-author is excluded.
 - Publications determined to be outside EEE scope after retrieval will be excluded.
 - LDP student-authors for whom no year-matched comparator publication is available (after exhausting all available oversampled comparators at their institution) will be excluded. The number of such exclusions and the institutions affected will be reported.
 - If, after exclusions, an institution has no matched control publications, the corresponding LDP publications from that institution will be excluded by random selection.
@@ -421,13 +431,13 @@ No transformations of the outcome are planned. The `fair_score` variable is the 
 
 ### Exploratory Analysis
 
-The following analyses are pre-specified as exploratory (not confirmatory). Results will be clearly labeled as exploratory in any report:
+The following analyses are pre-specified as exploratory (not confirmatory). Results will be clearly labelled as exploratory in any report:
 
 1. **FAIR component breakdown:** Separate group comparisons for each of the four FAIR letter scores (Findable, Accessible, Interoperable, Reusable) and for the two Reusable sub-components (Documentation, Licensing) to identify which aspects of FAIR compliance differ most between groups.
 
 2. **Institution-level subgroup analysis:** Separate group comparisons within the two largest institutions (UBC, McGill) to assess whether the overall result holds within each dominant site.
 
-3. **Score distribution visualization:** Observed FAIR score distributions and paired difference distributions by group.
+3. **Score distribution visualisation:** Observed FAIR score distributions and paired difference distributions by group.
 
 4. **Rater-level analysis:** Descriptive summary of mean scores by rater to identify any systematic rater tendencies.
 
