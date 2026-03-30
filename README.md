@@ -8,9 +8,9 @@ This repository contains the pre-registration document for the study:
 
 **Research Question:** Are data archives associated with peer-reviewed publications authored by graduates of the Living Data Project (LDP) — who received structured training in open science and FAIR data practices — more FAIR-compliant than those associated with publications from matched control graduates who did not receive such training?
 
-**Study Design:** Paired, matched-groups observational study. Each of 60 LDP student first-authors is matched one-to-one with a control student-author from the same institution. The primary outcome is a FAIR compliance score (0–10) assessed independently by three raters using a standardized checklist.
+**Study Design:** Paired, matched-groups observational study. 21 LDP student first-authors are each matched one-to-one with a control student-author from the same institution and same publication year. The primary outcome is a FAIR compliance score (0–10) assessed independently by three to five raters (k = 3–5) using a standardized checklist.
 
-**Primary test:** One-sided Wilcoxon signed-rank test on within-pair differences (LDP minus matched control), α = 0.05.
+**Primary test:** One-sided paired t-test on within-pair differences (LDP minus matched control), α = 0.05. A permutation test (sign-flip) is substituted if normality of paired differences is violated.
 
 ## Project Structure
 
@@ -32,14 +32,15 @@ This repository contains the pre-registration document for the study:
 | Design | Matched-groups observational study |
 | Unit of analysis | Publication (one per student-author) |
 | Unit of inference | Within-institution matched pair |
-| Groups | LDP graduates (n = 60) vs. matched controls (n = 60) |
-| Institutions | 7 (majority: UBC n = 33, McGill n = 20) |
-| Matching criteria | Same institution; overlapping thesis deposit years (2022–2024) |
-| Outcome | FAIR compliance score (0–10), mean of 3 raters |
-| Primary test | One-sided paired t-test on paired differences (Wilcoxon signed-rank if normality violated) |
-| Effect size | Cohen's *d* (Hodges-Lehmann pseudo-median if Wilcoxon substituted) |
+| Matched pairs | 21 (N = 42 publications: 21 LDP + 21 control) |
+| Matching criteria | Same institution; same publication year |
+| Raters | k = 3–5 independent raters |
+| Outcome | FAIR compliance score (0–10), mean of k raters' scores |
+| Primary test | One-sided paired t-test on paired differences; permutation test substituted if normality violated |
+| Effect size | Cohen's *d* for paired differences |
 | Significance level | α = 0.05, one-sided |
-| IRR measures | ICC (two-way mixed, absolute agreement) and Krippendorff's α |
+| Random seed | 20260329 |
+| IRR measures | ICC (two-way mixed, absolute agreement, average measures) and Krippendorff's α |
 
 ## FAIR Compliance Checklist (0–10)
 
