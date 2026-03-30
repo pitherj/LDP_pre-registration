@@ -22,7 +22,7 @@ The LDP offered formal graduate courses to enhance research transparency and rep
 
 To evaluate whether the training provided by the LDP has made a difference, we conduct a quasi-experimental, matched-groups study comparing FAIR compliance scores of research data associated with publications authored by LDP trainees versus matched controls. Controls are graduate students from the same institutions who did not receive LDP training, and who completed theses in EEE.  The latter are identified using a text-based thesis classifier applied to Canadian thesis metadata, with author publications retrieved via the OpenAlex API.
 
-FAIR compliance is assessed by three to five trained raters using a standardised FAIR compliance checklist, producing a composite score (0–4) for each publication. We focus on the first three cohorts of LDP graduates (2020–2022), as these are the most likely to have a sufficient number of published research outputs.
+FAIR compliance is assessed by three to five trained raters using a standardized FAIR compliance checklist, producing a composite score (0–4) for each publication. We focus on the first three cohorts of LDP graduates (2020–2022), as these are the most likely to have a sufficient number of published research outputs.
 
 **Contributors**
 
@@ -67,7 +67,7 @@ Formally:
 
 ### Study Type
 
-Observational Study — Data are collected from study units (published research articles) that are not randomly assigned to a treatment. The "treatment" (LDP training) was received by students as part of their graduate program; group assignment is observational, not randomised.
+Observational Study — Data are collected from study units (published research articles) that are not randomly assigned to a treatment. The "treatment" (LDP training) was received by students as part of their graduate program; group assignment is observational, not randomized.
 
 We use a matched-groups (quasi-experimental) design.
 
@@ -75,7 +75,7 @@ We use a matched-groups (quasi-experimental) design.
 
 - Raters are not blinded to author identity. Data archives that adhere to FAIR principles will, by design, prominently identify contributors and authors in their metadata; attempting to conceal these identifiers would be both impractical and contrary to the nature of the assessment objects.
 - The potential for rater bias introduced by knowledge of author identity is considered minimal, given that the FAIR assessment checklist comprises predominantly binary and ordinal items (e.g., is a data availability statement present? are the data in an open format? is a license provided?) that leave little room for subjective interpretation.
-- Raters are partially blinded to group membership (LDP vs. Other); during rating, the raters may recognise names of students who completed the LDP courses. We expect this occurrence to be minimal. 
+- Raters are partially blinded to group membership (LDP vs. Other); during rating, the raters may recognize names of students who completed the LDP courses. We expect this occurrence to be minimal. 
 
 ### Is there any additional blinding in this study?
 
@@ -89,11 +89,11 @@ Matching criteria are: (1) same academic institution and (2) same publication ye
 
 Within each institution, LDP and control publications are randomly paired one-to-one, constrained to the same publication year. The comparator pool is oversampled at 2 × N_target per institution to ensure year-coverage across all LDP publication years. LDP student-authors without a year-matched comparator are excluded; the number of such exclusions is reported. Complete 1:1 pairing within each year is not guaranteed and depends on comparator availability.
 
-### Randomisation
+### Randomization
 
 This is an observational study; subjects are not randomly assigned to groups.
 
-However, randomisation is used in three places, all using a single pre-specified random seed (**seed = 20260329**):
+However, randomization is used in three places, all using a single pre-specified random seed (**seed = 20260329**):
 
 1. **LDP publication selection:** For each LDP student-author with multiple eligible publications, one is selected at random. The calendar year of the selected publication (Year *Y*) determines which comparator publications are eligible for pairing.
 
@@ -111,7 +111,7 @@ Registration prior to creation of data — As of the date of submission of this 
 
 ### Explanation of Existing Data
 
-The publication lists (the inputs to scoring) have been assembled prior to pre-registration as a necessary step in study design (to determine the achievable sample size and thus requisite time for rater assessments). However, no FAIR compliance scores have been calculated or observed, and no outcome data has been analysed. The research team has not examined any open science or FAIR-related characteristics of the identified publications.
+The publication lists (the inputs to scoring) have been assembled prior to pre-registration as a necessary step in study design (to determine the achievable sample size and thus requisite time for rater assessments). However, no FAIR compliance scores have been calculated or observed, and no outcome data has been analyzed. The research team has not examined any open science or FAIR-related characteristics of the identified publications.
 
 ### Data Collection Procedures
 
@@ -125,7 +125,7 @@ Control student-authors are identified using a text-based machine learning class
 For each eligible LDP student-author, one first-author peer-reviewed research article is selected at random (using the pre-specified seed) when multiple eligible publications exist. The calendar year of that selected publication (Year *Y*) is recorded. For the matched comparator at the same institution, one publication from Year *Y* is then selected at random from that comparator's available qualifying publications. This year-matched selection ensures that each LDP–comparator pair is drawn from the same publication year, controlling for temporal changes in journal and publisher requirements for data sharing that could otherwise confound FAIR score comparisons. If a comparator has no qualifying publication in Year *Y*, that LDP student-author is excluded from the analysis (see Data Exclusion). The oversampled comparator pool (2 × N_target per institution) is intended to reduce the incidence of such exclusions.
 
 **FAIR compliance assessment:**
-Three to five trained raters (k = 3–5) independently evaluate each selected publication using the standardised FAIR compliance checklist. Raters are not informed of the group membership (LDP vs. Other) of the publications they assess; however, partial unblinding may occur if a rater recognises a student author as an LDP participant. Raters are blind to each other's scores throughout the independent rating phase. Ratings are conducted independently and collected before inter-rater reliability is assessed. Any item-level discrepancies will be noted but will not result in adjudication for the primary analysis (the mean of k raters' scores is used). Adjudicated consensus scores may be used in a sensitivity analysis.
+Three to five trained raters (k = 3–5) independently evaluate each selected publication using the standardized FAIR compliance checklist. Raters are not informed of the group membership (LDP vs. Other) of the publications they assess; however, partial unblinding may occur if a rater recognizes a student author as an LDP participant. Raters are blind to each other's scores throughout the independent rating phase. Ratings are conducted independently and collected before inter-rater reliability is assessed. Any item-level discrepancies will be noted but will not result in adjudication for the primary analysis (the mean of k raters' scores is used). Adjudicated consensus scores may be used in a sensitivity analysis.
 
 **Inclusion criteria for publications:**
 - First-author publication by an eligible student-author
@@ -171,7 +171,7 @@ Not applicable. This is an observational study. The "treatment" (LDP training) w
 ### Measured Variables
 
 **Primary outcome variable — FAIR compliance score:**
-A composite score ranging from 0 to 4, representing the degree to which the data associated with a publication adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). Each of the four FAIR letters contributes a maximum of 1 point; sub-items within Reusable are scored in increments of 0.2, so non-integer values are possible. Assessed independently by k raters (k = 3–5) using the standardised FAIR compliance checklist. The variable used in primary analysis is the **mean of the k raters' scores** (a continuous value in [0, 4]).
+A composite score ranging from 0 to 4, representing the degree to which the data associated with a publication adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). Each of the four FAIR letters contributes a maximum of 1 point; sub-items within Reusable are scored in increments of 0.2, so non-integer values are possible. Assessed independently by k raters (k = 3–5) using the standardized FAIR compliance checklist. The variable used in primary analysis is the **mean of the k raters' scores** (a continuous value in [0, 4]).
 
 **Primary predictor — Training group:**
 Binary categorical variable: LDP (student completed LDP training) vs. Other (matched control without LDP training).
@@ -225,7 +225,7 @@ The goal is evaluation of data attached to a publication for its adherence to FA
 
 It is also being assumed here that the FAIR principles are being used for publication findings verification; data re-use in another application is tertiary to this. This then necessarily implies some looser restrictions that include limited time window for continued validation of data, subject matter familiarity with data types and software, norms on the use of certain binary data types, etc.
 
-Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalised for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
+Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalized for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
 
 ### Rating Guide
 
@@ -241,7 +241,7 @@ The publication is the conduit to the data in this context, so the data need not
 
 #### Accessible
 
-Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply due diligence on the part of the researcher, and this should not be penalised.
+Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply due diligence on the part of the researcher, and this should not be penalized.
 
 For data that are not restricted access, accessible will be interpreted as the data can be downloaded or recreated programmatically (a script is provided that does not require debugging), and clear instructions are provided for doing so. Additionally, if data are generated, this generation should be operating system agnostic (Linux, Mac, Windows) and should not rely on software behind a paywall. However, hardware limitations may reasonably prevent a laptop or desktop computer from generating the data. Lastly, access in this way may change over time; this evaluation is not measuring how 'future proofed' this access is, only if it can be accessed at the point in time that access is being verified.
 
@@ -266,7 +266,7 @@ Interoperable implies that data can be used across systems; systems here will be
 
 #### Reusable
 
-Reusability is characterised by two key aspects: (a) the ability to understand the data; (b) knowledge of how the data may or may not be reused. Both should remove all guesswork and the need to make assumptions about the data.
+Reusability is characterized by two key aspects: (a) the ability to understand the data; (b) knowledge of how the data may or may not be reused. Both should remove all guesswork and the need to make assumptions about the data.
 
 **A) Data Documentation**
 
@@ -437,7 +437,7 @@ The following analyses are pre-specified as exploratory (not confirmatory). Resu
 
 2. **Institution-level subgroup analysis:** Separate group comparisons within the two largest institutions (UBC, McGill) to assess whether the overall result holds within each dominant site.
 
-3. **Score distribution visualisation:** Observed FAIR score distributions and paired difference distributions by group.
+3. **Score distribution visualization:** Observed FAIR score distributions and paired difference distributions by group.
 
 4. **Rater-level analysis:** Descriptive summary of mean scores by rater to identify any systematic rater tendencies.
 
