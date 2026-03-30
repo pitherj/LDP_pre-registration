@@ -19,7 +19,7 @@ This repository contains the pre-registration document for the study:
 
 **Research Question:** Are data archives associated with peer-reviewed publications authored by graduates of the Living Data Project (LDP) — who received structured training in open science and FAIR data practices — more FAIR-compliant than those associated with publications from matched control graduates who did not receive such training?
 
-**Study Design:** Paired, matched-groups observational study. 21 LDP student first-authors are each matched one-to-one with a control student-author from the same institution and same publication year. The primary outcome is a FAIR compliance score (0–10) assessed independently by three to five raters (k = 3–5) using a standardized checklist.
+**Study Design:** Paired, matched-groups observational study. 21 LDP student first-authors are each matched one-to-one with a control student-author from the same institution and same publication year. The primary outcome is a FAIR compliance score (0–4) assessed independently by three to five raters (k = 3–5) using a standardized checklist.
 
 **Primary test:** One-sided paired t-test on within-pair differences (LDP minus matched control), α = 0.05. A permutation test (sign-flip) is substituted if normality of paired differences is violated.
 
@@ -28,13 +28,16 @@ This repository contains the pre-registration document for the study:
 ```
 .
 ├── LDP_preregistration_OSF.md      # Pre-registration document (OSF submission version)
+├── FAIR-compliance-checklist.md    # FAIR compliance rating instrument (authored by Mathew Vis-Dunbar)
 ├── osf_preregistration_template.md # OSF pre-registration template (reference)
 └── README.md                       # This file
 ```
 
 ## Main Document
 
-**`LDP_preregistration_OSF.md`** — The pre-registration document formatted for submission to OSF. Contains the full study description, hypotheses, design plan, sampling plan, variable definitions, FAIR compliance checklist, and analysis plan.
+**`LDP_preregistration_OSF.md`** — The pre-registration document formatted for submission to OSF. Contains the full study description, hypotheses, design plan, sampling plan, variable definitions, embedded FAIR compliance checklist, and analysis plan.
+
+**`FAIR-compliance-checklist.md`** — The standalone FAIR compliance rating instrument, authored by Mathew Vis-Dunbar. This is the instrument used by raters to score each publication; it is also reproduced in full within the pre-registration document.
 
 ## Study Design Summary
 
@@ -46,30 +49,32 @@ This repository contains the pre-registration document for the study:
 | Matched pairs | 21 (N = 42 publications: 21 LDP + 21 control) |
 | Matching criteria | Same institution; same publication year |
 | Raters | k = 3–5 independent raters |
-| Outcome | FAIR compliance score (0–10), mean of k raters' scores |
+| Outcome | FAIR compliance score (0–4), mean of k raters' scores |
 | Primary test | One-sided paired t-test on paired differences; permutation test substituted if normality violated |
 | Effect size | Cohen's *d* for paired differences |
 | Significance level | α = 0.05, one-sided |
 | Random seed | 20260329 |
 | IRR measures | ICC (two-way mixed, absolute agreement, average measures) and Krippendorff's α |
 
-## FAIR Compliance Checklist (0–10)
+## FAIR Compliance Checklist (0–4)
 
-| Component | Type | Max |
+Instrument authored by Mathew Vis-Dunbar. Each FAIR letter contributes a maximum of 1 point; the full instrument is reproduced in `FAIR-compliance-checklist.md` and embedded in the pre-registration document.
+
+| Component | Scoring | Max |
 |---|---|---|
-| Findable — data availability statement (structured vs. unstructured vs. absent) | Ordinal (2/1/0) | 2 |
-| Accessible — data downloadable or access protocols articulated | Binary | 1 |
-| Interoperable — data in open specification format | Binary | 1 |
-| Reusable — file formats identified | Binary | 1 |
-| Reusable — collection protocols or data source documented | Binary | 1 |
-| Reusable — processing is scripted and documented | Binary | 1 |
-| Reusable — all variables described | Binary | 1 |
-| Reusable — data accompanied by a license | Binary | 1 |
-| **Total** | | **10** |
+| Findable — data availability statement | Ordinal: structured = 1, unstructured = 0.5, absent = 0 | 1 |
+| Accessible — data downloadable or access protocols articulated | Binary: 1 / 0 | 1 |
+| Interoperable — data in open specification format | Binary: 1 / 0 | 1 |
+| Reusable — file formats identified | 0.2 | 0.2 |
+| Reusable — collection protocols or data source documented | 0.2 | 0.2 |
+| Reusable — processing is scripted and documented | 0.2 | 0.2 |
+| Reusable — all variables described | 0.2 | 0.2 |
+| Reusable — data accompanied by a license | 0.2 | 0.2 |
+| **Total** | | **4** |
 
 ## Blinding
 
-Raters are **not** blinded to author identity. Data archives adhering to FAIR principles prominently identify contributors in their metadata, making author-identity blinding both impractical and contrary to the nature of the assessment objects. Rater bias is minimised by the checklist structure, which is predominantly binary/ordinal and leaves little room for subjective interpretation.
+Raters are **not** blinded to author identity. Data archives adhering to FAIR principles prominently identify contributors in their metadata, making author-identity blinding both impractical and contrary to the nature of the assessment objects. Rater bias is minimised by the checklist structure, which leaves little room for subjective interpretation.
 
 Raters are partially blinded to group membership (LDP vs. Other); during rating, the raters may recognise names of students who completed the LDP courses. We expect this occurrence to be minimal.
 

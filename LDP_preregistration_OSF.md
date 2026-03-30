@@ -16,7 +16,7 @@ The LDP offered formal graduate courses to enhance research transparency and rep
 
 To evaluate whether the training provided by the LDP has made a difference, we conduct a quasi-experimental, matched-groups study comparing FAIR compliance scores of research data associated with publications authored by LDP trainees versus matched controls. Controls are graduate students from the same institutions who did not receive LDP training, and who completed theses in EEE.  The latter are identified using a text-based thesis classifier applied to Canadian thesis metadata, with author publications retrieved via the OpenAlex API.
 
-FAIR compliance is assessed by three to five trained raters using a standardized FAIR compliance checklist, producing a composite score (0–10) for each publication. We focus on the first three cohorts of LDP graduates (2020–2022), as these are the most likely to have a sufficient number of published research outputs.
+FAIR compliance is assessed by three to five trained raters using a standardized FAIR compliance checklist, producing a composite score (0–4) for each publication. We focus on the first three cohorts of LDP graduates (2020–2022), as these are the most likely to have a sufficient number of published research outputs.
 
 **Contributors**
 
@@ -138,11 +138,11 @@ The sample size is fixed by the number of eligible LDP graduates — it is not u
 
 **Power analysis (one-sided paired t-test, α = 0.05, n = 21 pairs):**
 
-Power for the paired t-test depends on the standard deviation of the within-pair differences (σ_D), not the standard deviation of the raw scores. Assuming σ_D ≈ 2.5 (a conservative estimate for a 0–10 bounded score when pairs share institutional context), the study has approximately:
-- 80% power to detect a mean paired difference of ≈ 1.42 points (d ≈ 0.57)
-- 90% power to detect a mean paired difference of ≈ 1.74 points (d ≈ 0.70)
+Power for the paired t-test depends on the standard deviation of the within-pair differences (σ_D), not the standard deviation of the raw scores. Assuming σ_D ≈ 1.0 (a conservative estimate for a 0–4 bounded score when pairs share institutional context), the study has approximately:
+- 80% power to detect a mean paired difference of ≈ 0.57 points (d ≈ 0.57)
+- 90% power to detect a mean paired difference of ≈ 0.70 points (d ≈ 0.70)
 
-If the within-pair differences are less variable (e.g., σ_D ≈ 2.0), these thresholds are proportionally smaller (≈ 1.14 and ≈ 1.39 points respectively). Power estimates were obtained using `pwr::pwr.t.test(n = 21, sig.level = 0.05, type = "paired", alternative = "greater")`.
+If the within-pair differences are less variable (e.g., σ_D ≈ 0.85), these thresholds are proportionally smaller (≈ 0.48 and ≈ 0.59 points respectively). Power estimates were obtained using `pwr::pwr.t.test(n = 21, sig.level = 0.05, type = "paired", alternative = "greater")`.
 
 The study is adequately powered to detect moderate-to-large effects (d ≥ 0.57) but is underpowered for small effects (d < 0.4). The detectable effect sizes are considered plausible given the targeted nature of the LDP training; however, the inability to detect smaller effects is acknowledged as a limitation. The permutation test (sign-flip on paired differences) has power approaching that of the paired t-test under normality, so these estimates are approximately applicable to the backup test as well.
 
@@ -161,7 +161,7 @@ Not applicable. This is an observational study. The "treatment" (LDP training) w
 ### Measured Variables
 
 **Primary outcome variable — FAIR compliance score:**
-A composite integer score ranging from 0 to 10, representing the degree to which the data associated with a publication adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). Assessed independently by k raters (k = 3–5) using the standardized FAIR compliance checklist. The variable used in primary analysis is the **mean of the k raters' scores** (a continuous value in [0, 10]).
+A composite score ranging from 0 to 4, representing the degree to which the data associated with a publication adheres to FAIR principles (Findable, Accessible, Interoperable, Reusable). Each of the four FAIR letters contributes a maximum of 1 point; sub-items within Reusable are scored in increments of 0.2, so non-integer values are possible. Assessed independently by k raters (k = 3–5) using the standardized FAIR compliance checklist. The variable used in primary analysis is the **mean of the k raters' scores** (a continuous value in [0, 4]).
 
 **Primary predictor — Training group:**
 Binary categorical variable: LDP (student completed LDP training) vs. Other (matched control without LDP training).
@@ -178,25 +178,109 @@ Academic institution (7 levels). Used to form within-institution matched pairs. 
 
 ### Indices
 
-**FAIR compliance score (0–10):**
+**FAIR compliance score (0–4):**
 
-The composite score is the sum of the following component scores, each assessed independently by each rater:
+The composite score assigns equal maximum weight (1 point) to each of the four FAIR principles. The score is the sum of the following component scores, each assessed independently by each rater:
 
-| Component | Items | Scoring | Maximum |
+| FAIR letter | Component | Scoring | Maximum |
 |---|---|---|---|
-| Findable | Structured data availability statement with working pointer vs. unstructured statement vs. absent | Ordinal: 2 = structured, 1 = unstructured, 0 = absent (mutually exclusive levels) | 2 |
-| Accessible | Data downloadable/recreatable (unrestricted) OR access protocols clearly articulated (restricted) | Binary: 1 = criterion met, 0 = not met | 1 |
-| Interoperable | Data provided in open specification format | Binary: 1 = criterion met, 0 = not met | 1 |
-| Reusable — file formats identified | File formats clearly identified | Binary: 1 = yes, 0 = no | 1 |
-| Reusable — collection protocols | Collection protocols outlined or data source identified | Binary: 1 = yes, 0 = no | 1 |
-| Reusable — scripted processing | Data processing is scripted and documented | Binary: 1 = yes, 0 = no | 1 |
-| Reusable — variables described | All variables described with names, scales, and ranges | Binary: 1 = yes, 0 = no | 1 |
-| Reusable — licensing | Data accompanied by a clearly articulated license | Binary: 1 = yes, 0 = no | 1 |
-| **Total** | | | **10** |
+| **Findable** | Data availability statement with working pointer | Structured statement = 1; unstructured statement = 0.5; absent or pointer missing = 0 | 1 |
+| **Accessible** | Data downloadable/recreatable (unrestricted) OR access protocols clearly articulated (restricted) | Binary: 1 = criterion met, 0 = not met | 1 |
+| **Interoperable** | Data provided in an open-specification format | Binary: 1 = criterion met, 0 = not met | 1 |
+| **Reusable** — file formats identified | File formats clearly identified | 0.2 |
+| **Reusable** — collection protocols | Collection protocols outlined or data source identified | 0.2 |
+| **Reusable** — scripted processing | Data processing is scripted and documented | 0.2 |
+| **Reusable** — variables described | All variables fulsomely described | 0.2 |
+| **Reusable** — licensing | Publicly sourced license, or bespoke license with lay summary | 0.2 |
+| **Total** | | | **4** |
 
-**Note on the Findable items:** The two Findable checkboxes in the assessment instrument are treated as mutually exclusive levels of a single dimension rather than as two independent binary items. A structured data availability statement subsumes an unstructured one; the highest applicable level is recorded. This scoring approach preserves the hierarchical quality distinction (structured > unstructured > absent) while contributing a maximum of 2 points to the total, keeping the overall maximum at 10.
+**Notes:**
+- The Findable score is a single ordinal dimension (structured > unstructured > absent), not two independent binary items. The highest applicable level is recorded.
+- The five Reusable sub-items each contribute 0.2 points, summing to a maximum of 1.0 for the Reusable component. This preserves equal weighting across all four FAIR letters.
+- Non-integer total scores are possible (e.g., a publication with an unstructured data availability statement scores 0.5 on Findable).
 
-The primary analysis uses the **mean of all k raters' component-sum scores** (k = 3–5) as the outcome variable (a continuous value in [0, 10]).
+The primary analysis uses the **mean of all k raters' component-sum scores** (k = 3–5) as the outcome variable (a continuous value in [0, 4]).
+
+---
+
+## FAIR Compliance Checklist
+
+This section reproduces the full FAIR compliance assessment instrument used by raters. Scores are recorded per item and summed to produce the composite FAIR compliance score (0–4) described in the Indices section above.
+
+### Context
+
+#### What Is Being Measured
+
+The goal is evaluation of data attached to a publication for its adherence to FAIR. As such, we start with the premise that the researcher's data management practices are being measured using the categories of FAIR. However, their practices may be limited by external factors beyond their control, so the goal is not to establish if the 'best' practice has been met, but rather that the 'best available' practice has been met.
+
+It is also being assumed here that the FAIR principles are being used for publication findings verification; data re-use in another application is tertiary to this. This then necessarily implies some looser restrictions that include limited time window for continued validation of data, subject matter familiarity with data types and software, norms on the use of certain binary data types, etc.
+
+Some reasonable limitations that might emerge from this then include, for example, that while ostensibly the most interoperable format would be plain text, in some circumstances it may not be viable, such as when memory storage or transfer limitations exist, requiring a smaller, binary representation of the data, i.e. some form of compression. Similarly, ideally access is open and frictionless, however, many data sets have reasonable limitations to access and the researcher should not be penalized for this. However, unless these limitations are described, understanding the rationale for limited access is not possible.
+
+### Rating Guide
+
+#### Findable
+
+The publication is the conduit to the data in this context, so the data need not be independently discoverable of the publication. Findable then requires an explicit statement about the data in the body of the publication. This is best done in a structured way, with **a defined data availability statement as a header**. Less ideal is a statement in passing elsewhere in the publication. In either case, this statement should include a pointer to the actual data (section of paper, file name of supplementary materials, stable identifier (i.e. DOI) to external repository, data steward, etc.). In all cases, the link must correctly redirect the reader. This redirection may lead one to a paywall, data access requirement, or other barrier to access; this is an issue of access not 'findability'.
+
+| Criteria | Score |
+| :--- | :--- |
+| Includes structured data availability statement with a working pointer. | 1 |
+| Includes unstructured data availability statement with a working pointer. | 0.5 |
+| No data availability statement is made or working pointer is missing. | 0 |
+
+#### Accessible
+
+Accessibility will depend on whether or not data are reasonably restricted. If data are restricted for any reason, a statement indicating the need for the restrictions should be articulated. If there is no evident need for restricting access, the data should be reasonably expected to be made available without formal request to a data steward. The extra barriers to accessing restricted data are reasonable and imply due diligence on the part of the researcher, and this should not be penalized.
+
+For data that are not restricted access, accessible will be interpreted as the data can be downloaded or recreated programmatically (a script is provided that does not require debugging), and clear instructions are provided for doing so. Additionally, if data are generated, this generation should be operating system agnostic (Linux, Mac, Windows) and should not rely on software behind a paywall. However, hardware limitations may reasonably prevent a laptop or desktop computer from generating the data. Lastly, access in this way may change over time; this evaluation is not measuring how 'future proofed' this access is, only if it can be accessed at the point in time that access is being verified.
+
+For data that are restricted, accessible will be interpreted as clear access protocols being articulated; this may include mediated access or non-access to the data depending on restriction level. In any case, general or specific access considerations should be provided; simply providing contact information for an access request is insufficient. If the author of the paper is not responsible for provisioning access to the data (commercially restricted, legally restricted, culturally restricted, etc.) this is clearly articulated and the source for access is pointed to.
+
+| Criteria | Score |
+| :--- | :--- |
+| Data are not restricted and downloadable or can be programmatically recreated. | 1 |
+| Data are restricted; access protocols are clearly articulated. | 1 |
+| Data are not restricted, but cannot be readily downloaded or programmatically recreated. | 0 |
+| Data are restricted; no clear access protocols are defined. | 0 |
+| Data are restricted; no reasonable argument is provided for the restriction. | 0 |
+
+#### Interoperable
+
+Interoperable implies that data can be used across systems; systems here will be interpreted as both hardware and software. This is enabled through open specification. Thus, any open specification file format will be interpreted as interoperable, whether the file format is proprietary or not. There is no preference for text-based or binary formats.
+
+| Criteria | Score |
+| :--- | :--- |
+| Data are interoperable (provided in an open specification format). | 1 |
+| Data are not interoperable (closed source, closed specification, binary format). | 0 |
+
+#### Reusable
+
+Reusability is characterized by two key aspects: (a) the ability to understand the data; (b) knowledge of how the data may or may not be reused. Both should remove all guesswork and the need to make assumptions about the data.
+
+**A) Data Documentation**
+
+The former is reliant on data documentation that, among other things, establishes the provenance, and hence acts as a marker of trust, in the acquisition and processing of the data. Documentation may be embedded with the data or standalone, and, at a minimum, captures the following.
+
+- Data file formats are clearly identified. These formats do not need to be interoperable.
+- Collection protocols are outlined or the source of the data is identified if it is not original data. Data collection protocols should address who collected the data (who is responsible for initial integrity), when and where it was collected (context), and how it was collected (what instruments were used). The 'where' may be reasonably restricted for some data.
+- Data processing is documented. For this to maintain the marker of trust this cannot simply be described in accompanying documentation; it should be scripted, and all scripts from initial data ingest to data used for analysis should be provided. These scripts require sufficient documentation to understand their implementation. The scripts are not under direct evaluation; other than being able to clearly describe the processing activities (literate programming, robust commenting), it is not required that they be executable.
+- All variables are described; all variable names include descriptions of the variables, are accompanied by relevant scales, ranges, etc., and indicate if they are derived, etc. The focus is on human reusability, not machine reusability, so while metadata standards are preferred in making variables machine interpretable and actionable, this is not required.
+
+| Criteria | Score |
+| :--- | :--- |
+| File formats are identified. | 0.2 |
+| Collection protocols are noted. | 0.2 |
+| Includes scripted data processing. | 0.2 |
+| Variables are fulsomely described. | 0.2 |
+
+**B) Data Licensing**
+
+The data are accompanied by a clearly articulated license indicating how the data may be re-used, re-distributed, and how it should be accredited. While publicly available licenses are preferred (CC, OSI, GNU, etc.), bespoke licenses with lay interpretations suffice. Again, we are evaluating on human reusability; a lay interpretation allows non-legal experts to properly re-use the data.
+
+| Criteria | Score |
+| :--- | :--- |
+| A publicly sourced license is attached, or a bespoke license is included with a lay summary. | 0.2 |
 
 ---
 
@@ -237,7 +321,7 @@ ratings_long %>%
     unit_id  = publication_id,
     coder_id = rater_id,
     fair_score,
-    levels       = c(fair_score = "ordinal"),  # treat score as ordinal
+    levels       = c(fair_score = "interval"),  # interval scale: fractional sub-items make equal spacing assumption reasonable
     kripp_alpha  = TRUE,
     agreement    = TRUE,    # also report simple percent agreement
     fleiss_kappa = TRUE     # also report Fleiss' kappa as supplementary
@@ -256,7 +340,7 @@ D_i = fair_score_LDP_i - fair_score_Other_i
 
 where `fair_score` is the mean of k raters' scores (k = 3–5).
 
-Because the outcome is the mean of k independent raters' scores (k = 3–5) — rather than a single raw integer rating — the paired differences D_i are quasi-continuous (steps of 1/k) and benefit from within-pair averaging that moves their distribution toward normality. At n = 21 pairs the Central Limit Theorem provides some robustness, though the small sample size means that the permutation sensitivity analysis is especially important. The paired t-test is therefore the preferred primary test: it directly tests the mean difference (which is the quantity of interest) and yields Cohen's *d* as an interpretable effect size. 
+Because the outcome is the mean of k independent raters' scores (k = 3–5) — rather than a single raw rating — the paired differences D_i are quasi-continuous and benefit from within-pair averaging that moves their distribution toward normality. The fractional sub-items within Reusable (0.2 increments) further improve distributional properties relative to a purely integer scale. At n = 21 pairs the Central Limit Theorem provides some robustness, though the small sample size means that the permutation sensitivity analysis is especially important. The paired t-test is therefore the preferred primary test: it directly tests the mean difference (which is the quantity of interest) and yields Cohen's *d* as an interpretable effect size. 
 
 **Assumption check (pre-specified):** Before interpreting the result, normality of the paired differences will be assessed using visual inspection (histogram and Q-Q plot). If visual inspection indicates meaningful departure from normality, the permutation test (Sensitivity Analysis 1 below) will be substituted as the primary inferential result.
 
@@ -276,7 +360,7 @@ D <- data$fair_score_LDP - data$fair_score_Other
 # --- Assumption check: normality of paired differences ---
 
 par(mfrow = c(1, 2))
-hist(D, main = "Paired differences", xlab = "LDP − Other (mean FAIR score)")
+hist(D, main = "Paired differences", xlab = "LDP − Other (mean FAIR score, 0–4 scale)")
 qqnorm(D); qqline(D, col = "red")
 
 # --- Primary analysis: one-sided paired t-test ---
@@ -327,7 +411,7 @@ No transformations of the outcome are planned. The `fair_score` variable is the 
 - Publications determined to be outside EEE scope after retrieval will be excluded.
 - LDP student-authors for whom no year-matched comparator publication is available (after exhausting all available oversampled comparators at their institution) will be excluded. The number of such exclusions and the institutions affected will be reported.
 - If, after exclusions, an institution has no matched control publications, the corresponding LDP publications from that institution will be excluded by random selection.
-- Outliers in FAIR scores will **not** be excluded; the outcome is bounded (0–10) and extreme values are interpretable.
+- Outliers in FAIR scores will **not** be excluded; the outcome is bounded (0–4) and extreme values are interpretable.
 
 ### Missing Data
 
@@ -339,7 +423,7 @@ No transformations of the outcome are planned. The `fair_score` variable is the 
 
 The following analyses are pre-specified as exploratory (not confirmatory). Results will be clearly labeled as exploratory in any report:
 
-1. **FAIR component breakdown:** Separate group comparisons for each of the five FAIR components (Findable, Accessible, Interoperable, Reusable-Documentation, Reusable-Licensing) to identify which aspects of FAIR compliance differ most between groups.
+1. **FAIR component breakdown:** Separate group comparisons for each of the four FAIR letter scores (Findable, Accessible, Interoperable, Reusable) and for the two Reusable sub-components (Documentation, Licensing) to identify which aspects of FAIR compliance differ most between groups.
 
 2. **Institution-level subgroup analysis:** Separate group comparisons within the two largest institutions (UBC, McGill) to assess whether the overall result holds within each dominant site.
 
