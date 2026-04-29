@@ -13,7 +13,8 @@ This repository contains the pre-registration document for the study:
 | 2026-01-06 | Ethics approval (UBC BREB) |
 | 2026-01-13 | Pre-registration initiated |
 | 2026-01-13 | README created |
-| 2026-03-30 | README last updated |
+| 2026-04-05 | (Pre-registration submitted)[https://doi.org/10.17605/OSF.IO/UYQT4] |
+| 2026-04-29 | README last updated |
 
 ## Overview
 
@@ -35,7 +36,7 @@ This repository contains the pre-registration document for the study:
 
 ## Main Document
 
-**`LDP_preregistration_OSF.md`** — The pre-registration document formatted for submission to OSF. Contains the full study description, hypotheses, design plan, sampling plan, variable definitions, embedded FAIR compliance checklist, and analysis plan.
+**`LDP_preregistration_OSF.md`** — The pre-registration document formatted for submission to OSF. Contains the full study description, hypotheses, design plan, sampling plan, variable definitions, embedded FAIR compliance checklist, and analysis plan.  The official pre-registration is on OSF with this DOI: (https://doi.org/10.17605/OSF.IO/UYQT4)[https://doi.org/10.17605/OSF.IO/UYQT4], and the "files" folder on that OSF project includes markdown, R markdown, and PDF formats.
 
 **`FAIR-compliance-checklist.md`** — The standalone FAIR compliance rating instrument, authored by Mathew Vis-Dunbar. This is the instrument used by raters to score each publication; it is also reproduced in full within the pre-registration document.
 
